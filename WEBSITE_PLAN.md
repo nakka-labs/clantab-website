@@ -58,16 +58,27 @@ placeholders. Supersedes the generic template in `nakka-dev-website`'s
 
 ## Manual steps to actually go live
 
-1. **Create the GitHub repo.** `nakka-labs/clantab-website`, public
+1. [ ] **Create the GitHub repo.** `nakka-labs/clantab-website`, public
    (matches the rest of the portfolio — nothing here is sensitive).
-   Push this local repo to it.
-2. **Cloudflare Pages project.** New project → connect to
-   `nakka-labs/clantab-website` → framework preset "None" → build
-   command empty → output directory `/` (repo root).
-3. **Custom domain.** In that Pages project's settings, add custom
-   domain `clantab.nakka.dev`. Since `nakka.dev` is already on
-   Cloudflare, the DNS record gets added automatically — no manual DNS
-   edit needed.
+   Push this local repo to it. (Not yet confirmed done as of 2026-09-09
+   — the Cloudflare project below exists, confirm the repo push too.)
+2. [x] **Cloudflare project connected + deployed.** Done 2026-09-09.
+   Note: Cloudflare has unified Pages into Workers — connecting a repo
+   here creates a **Worker** (Workers Static Assets), not a classic
+   "Pages project". Same result (static file hosting), different
+   dashboard: Workers & Pages → `clantab-website` → tabs are
+   Overview/Metrics/Deployments/Bindings/Observability/**Domains**/Access/Settings.
+3. [x] **Custom domain — live.** Done 2026-09-09 at
+   `clantab-website` → **Domains** tab → **+ Add Domain** → select the
+   `nakka.dev` zone → **Subdomain** field.
+   **Root cause of the "nothing happens" failure**: that Subdomain
+   field only wants the label (`clantab`) — it already appends
+   `.nakka.dev` after you pick the zone. Typing the full
+   `clantab.nakka.dev` there builds an invalid double-suffixed
+   hostname and the dialog fails silently on Add/Continue, no error
+   shown. Typing just `clantab` worked immediately — DNS + SSL
+   provisioned in under a minute, verified live at
+   `https://clantab.nakka.dev/`.
 4. **Once live, update `clantab-ios/docs/appstore/metadata.md`:**
    - Support URL → `https://clantab.nakka.dev/support.html`
    - Privacy Policy URL → `https://clantab.nakka.dev/privacy.html`
