@@ -19,3 +19,14 @@
 
 /brand/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Universal Links for the ClanTab iOS app (clantab-ios: "Custom domain +
+# Universal Links"). Apple's swcd fetches this and requires application/json,
+# HTTP 200, no redirect. Scoped to /g/* so only group invite links open the
+# app; the marketing pages stay web.
+/.well-known/apple-app-site-association
+  Content-Type: application/json
+  Cache-Control: public, max-age=3600
+/apple-app-site-association
+  Content-Type: application/json
+  Cache-Control: public, max-age=3600

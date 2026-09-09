@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["UK652GNPP7.com.clantab.app"],
+        "components": [
+          {
+            "/": "/g/*",
+            "comment": "Group invite links open directly in the ClanTab app"
+          }
+        ]
+      }
+    ]
+  }
+}

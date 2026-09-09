@@ -1,0 +1,4 @@
+# Fallback: if Cloudflare Pages doesn't serve the dot-prefixed .well-known
+# path directly, rewrite (200, not a redirect — Apple rejects redirects on
+# the AASA) to the identical root copy. No-op when the dotfile is served.
+/.well-known/apple-app-site-association  /apple-app-site-association  200

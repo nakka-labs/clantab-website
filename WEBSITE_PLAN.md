@@ -89,3 +89,23 @@ placeholders. Supersedes the generic template in `nakka-dev-website`'s
 5. **Decide the fate of the GitHub Pages site**
    (`nakka-labs.github.io/clantab-ios`) — retire it, or leave it as a
    fallback/redirect. Not urgent.
+
+## Universal Links for the iOS app (added 2026-09-09)
+
+`clantab-ios` share links are `https://clantab.nakka.dev/g/<id>?token=<t>`.
+For a device with the app installed to open them directly:
+
+- [x] **AASA file** — `/.well-known/apple-app-site-association` (+ a root
+      copy and a `_redirects` 200-rewrite fallback in case Workers Static
+      Assets doesn't serve the dot-path), `Content-Type: application/json`
+      via `_headers`. Scoped `applinks: /g/*` so only invite links open the
+      app; every marketing page stays web. App ID `UK652GNPP7.com.clantab.app`.
+- [ ] **Worker Route** `clantab.nakka.dev/g/*` → the `clantab` API Worker
+      (dashboard: Workers & Pages → `clantab` → Settings → Domains & Routes →
+      Add Route), so a recipient *without* the app lands on the Worker's
+      "Open in ClanTab" fallback page rather than this site's 404. If a Route
+      can't coexist with this site's Custom Domain on the same hostname,
+      fall back to a static `g/index.html` + `_redirects` here instead.
+- [ ] Owner: enable the **Associated Domains** capability on the
+      `com.clantab.app` App ID (Apple Developer portal), then a TestFlight
+      build + a real-device tap test. Tracked in `clantab-ios/CHECKLIST.md`.
